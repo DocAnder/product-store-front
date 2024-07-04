@@ -1,0 +1,10 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.action-container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 0;
+}
