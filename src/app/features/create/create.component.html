@@ -1,3 +1,6 @@
+<div class="action-container">
+    <a mat-raised-button color="primary" [routerLink]="['']">Voltar</a>
+</div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
     <mat-form-field>
         <mat-label>Nome</mat-label>
@@ -15,10 +18,5 @@
         <mat-label>Url imagem</mat-label>
         <input matInput type="text" formControlName="image" placeholder="Colar o link da imagem">
     </mat-form-field>
-
-
-
-    
-
     <button color="primary" type="submit" mat-raised-button>Salvar</button>
 </form>
