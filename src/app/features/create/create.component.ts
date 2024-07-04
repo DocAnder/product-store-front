@@ -17,7 +17,6 @@ import { RouterLink } from '@angular/router';
 export class CreateComponent {
 
   productsService = inject(ProductsService);
-
   snackBar = inject(MatSnackBar);
 
   form = new FormGroup({
@@ -40,9 +39,6 @@ export class CreateComponent {
   });
 
   onSubmit(){
-
-    
-
     this.productsService.create({
       name: this.form.controls.name.value,
       price: this.form.controls.price.value,
