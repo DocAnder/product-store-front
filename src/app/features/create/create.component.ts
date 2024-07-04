@@ -1,25 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule} from "@angular/material/form-field"
 import { MatInputModule} from "@angular/material/input"
+import { ProductsService } from '../../shared/services/products.service';
 
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './create.component.html',
   styleUrl: './create.component.scss'
 })
 export class CreateComponent {
+
+  productsService = inject(ProductsService);
+
+
   form = new FormGroup({
-    name: new FormControl<String>('', {
+    name: new FormControl<string>('', {
+      nonNullable:true,
+      validators: Validators.required 
+    }),
+    price: new FormControl<string>('', {
+      nonNullable:true,
+      validators: Validators.required 
+    }),
+    description: new FormControl<string>('', {
+      nonNullable:true,
+      validators: Validators.required 
+    }),
+    image: new FormControl<string>('', {
       nonNullable:true,
       validators: Validators.required 
     }),
   });
 
   onSubmit(){
-    this.form.controls.name.value;
+    this.productsService.create({
+      name: this.form.controls.name.value,
+      price: this.form.controls.price.value,
+      description: this.form.controls.description.value,
+      image: this.form.controls.image.value
+    })
+    .subscribe(() => {
+      alert('Salvo com sucesso!')
+    });    
   }
 
 }
