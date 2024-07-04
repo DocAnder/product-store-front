@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule} from "@angular/material/form-field"
-import { MatInputModule} from "@angular/material/input"
+import { MatInputModule } from "@angular/material/input"
+import { MatSnackBar } from "@angular/material/snack-bar"
 import { ProductsService } from '../../shared/services/products.service';
 import { RouterLink } from '@angular/router';
 
@@ -17,6 +18,7 @@ export class CreateComponent {
 
   productsService = inject(ProductsService);
 
+  snackBar = inject(MatSnackBar);
 
   form = new FormGroup({
     name: new FormControl<string>('', {
@@ -38,6 +40,9 @@ export class CreateComponent {
   });
 
   onSubmit(){
+
+    
+
     this.productsService.create({
       name: this.form.controls.name.value,
       price: this.form.controls.price.value,
@@ -45,7 +50,11 @@ export class CreateComponent {
       image: this.form.controls.image.value
     })
     .subscribe(() => {
-      alert('Salvo com sucesso!')
+      this.snackBar.open('Produto Salvo!','', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
     });    
   }
 
