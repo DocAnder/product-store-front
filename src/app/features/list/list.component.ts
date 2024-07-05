@@ -65,7 +65,14 @@ export class ListComponent {
     this.matDialog.open(ConfirmationDialogComponent)
     .afterClosed()
     .subscribe((answer: boolean) =>{
-      console.log('afterClosed', answer);
+      if (answer){
+        this.productsService.delete(product.id)
+        .subscribe(() => {
+          this.productsService.getAll().subscribe((products) => {
+            this.products = products;
+          });
+        });
+      }
     });
   }
 
