@@ -25,5 +25,10 @@ export class ProductsService {
   update(id: string, payload: ProductPayload){
     return this.httpClient.put(`http://127.0.0.1:8000/api/products/${id}`, payload);
   }
+
+  delete(id: string){
+    // http://127.0.0.1:8000/api/products/3
+    return this.httpClient.delete(`http://127.0.0.1:8000/api/products/${id}`);
+  }
   
 }
