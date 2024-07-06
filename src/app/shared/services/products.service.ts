@@ -30,6 +30,10 @@ export class ProductsService {
     return this.httpClient.post(`http://127.0.0.1:8000/api/products/${id}`, payload);
   }
 
+  updateProductWithImage(id: string, payload: FormData){
+    return this.httpClient.post(`http://127.0.0.1:8000/api/products/${id}`, payload);
+  }
+
   delete(id: string){
     // http://127.0.0.1:8000/api/products/3
     return this.httpClient.delete(`http://127.0.0.1:8000/api/products/${id}`);
