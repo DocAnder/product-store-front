@@ -20,6 +20,7 @@ export class CreateComponent {
   productsService = inject(ProductsService);
   snackBar = inject(MatSnackBar);
   selectedFile!: File;
+  //fileWhasSelected = false
   
 
   form = new FormGroup({
@@ -39,6 +40,7 @@ export class CreateComponent {
 
   onFileChange(event: any) {    
     if (event.target.files.length > 0) {
+      //this.fileWhasSelected = true;
       this.selectedFile = event.target.files[0];
     }
   }
@@ -47,8 +49,9 @@ export class CreateComponent {
     const formData = new FormData();    
     formData.append('name', this.form.controls.name.value)
     formData.append('price', this.form.controls.price.value)
-    formData.append('description', this.form.controls.description.value)
+    formData.append('description', this.form.controls.description.value)    
     formData.append('image', this.selectedFile);
+    
     this.productsService.createProductWhitImage(formData)
     .subscribe(() => {
         this.snackBar.open('Produto Salvo!','', {
