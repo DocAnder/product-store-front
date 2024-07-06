@@ -8,11 +8,12 @@ import { MatSnackBar } from "@angular/material/snack-bar"
 import { ProductsService } from '../../shared/services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../shared/interfaces/product.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterLink],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, RouterLink, CommonModule],
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.scss'
 })
@@ -22,6 +23,8 @@ export class EditComponent {
   productsService = inject(ProductsService);
   router = inject(Router);
   product: Product = inject(ActivatedRoute).snapshot.data['product'];
+  selectedFile!: File;
+  fileWhasSelected = false
 
   form = new FormGroup({
     name: new FormControl<string>(this.product.name, {
@@ -42,13 +45,24 @@ export class EditComponent {
     }),
   });
 
+  onFileChange(event: any) {
+    console.log('evento acionado trouxe o valor de ' + this.fileWhasSelected);      
+    if (event.target.files.length > 0) {            
+      this.fileWhasSelected = true;      
+      console.log('o if do arquivo passou e agora é ' + this.fileWhasSelected);
+      this.selectedFile = event.target.files[0];      
+    }
+  }
+
   onSubmit(){
-    this.productsService.update(this.product.id, {
-      name: this.form.controls.name.value,
-      price: this.form.controls.price.value,
-      description: this.form.controls.description.value,
-      image: this.form.controls.image.value
-    })
+    const formData = new FormData();
+    formData.append('name', this.form.controls.name.value)
+    formData.append('price', this.form.controls.price.value)
+    formData.append('description', this.form.controls.description.value)
+    if(this.fileWhasSelected){
+      formData.append('image', this.selectedFile);
+    }    
+    this.productsService.updateProductWithImage(this.product.id, formData)
     .subscribe(() => {
       this.snackBar.open('Produto Editado!','', {
         duration: 3000,

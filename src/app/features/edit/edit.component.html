@@ -4,19 +4,26 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
     <mat-form-field>
         <mat-label>Nome</mat-label>
-        <input matInput type="text" formControlName="name" placeholder="Nome do produto">
+        <input matInput type="text" formControlName="name" placeholder="Ex: Iphone XR Plus">
     </mat-form-field>
     <mat-form-field>
         <mat-label>Valor</mat-label>
-        <input matInput type="text" formControlName="price" placeholder="Somente numeros">
+        <input matInput type="text" formControlName="price" placeholder="Ex: 1.599,60">
     </mat-form-field>
     <mat-form-field>
         <mat-label>Descrição</mat-label>
         <input matInput type="text" formControlName="description" placeholder="Texto curto">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Url imagem</mat-label>
-        <input matInput type="text" formControlName="image" placeholder="Colar o link da imagem">
-    </mat-form-field>
+    <div class="file-input-container">
+        <img class="product-image" [src]="product.image">        
+    </div>
+    <div>
+        <label mat-raised-button color="primary">
+            <input type="file" (change)="onFileChange($event)">
+            
+          </label>
+          <span *ngIf="selectedFile"></span>
+    </div>
+    
     <button color="primary" type="submit" mat-raised-button>Salvar</button>
 </form>
