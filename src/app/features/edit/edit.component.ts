@@ -36,7 +36,7 @@ export class EditComponent {
       nonNullable:true,
       validators: Validators.required 
     }),
-    image: new FormControl<string>(this.product.image, {
+    image: new FormControl<File | null>(this.product.image, {
       nonNullable:true,
       validators: Validators.required 
     }),
