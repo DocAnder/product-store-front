@@ -14,9 +14,12 @@
         <mat-label>Descrição</mat-label>
         <input matInput type="text" formControlName="description" placeholder="Texto curto">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>Url imagem</mat-label>
-        <input matInput type="text" formControlName="image" placeholder="Colar o link da imagem">
-    </mat-form-field>
+    <div class="file-input-container">
+        <label mat-raised-button color="primary">
+          <input type="file"  (change)="onFileChange($event)">
+          
+        </label>
+        <span *ngIf="selectedFile"></span>
+    </div>
     <button color="primary" type="submit" mat-raised-button>Salvar</button>
 </form>
