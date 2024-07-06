@@ -16,6 +16,7 @@ export class CardComponent {
 
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
+  @Output() details = new EventEmitter();
 
   productName = computed(() => this.product().name)
   productPrice = computed(() => this.product().price)
@@ -26,6 +27,10 @@ export class CardComponent {
 
   onDelete(){
     this.delete.emit();
+  }
+
+  onDetails(){
+    this.details.emit();
   }
 
 }

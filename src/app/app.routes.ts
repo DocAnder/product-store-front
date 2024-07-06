@@ -26,5 +26,17 @@ export const routes: Routes = [
     loadComponent: () => import('./features/edit/edit.component').then(
         (m) => m.EditComponent
     ),
+},
+{
+    path: 'product-details/:id',
+    resolve: {
+        product: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+            const service = inject(ProductsService);
+            return service.getOne(route.paramMap.get('id') as string);            
+        },
+    },
+    loadComponent: () => import('./features/product-details/product-details.component').then(
+        (m) => m.ProductDetailsComponent
+    ),
 }
 ];

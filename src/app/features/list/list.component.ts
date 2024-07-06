@@ -76,4 +76,8 @@ export class ListComponent {
     });
   }
 
+  onDetails(product: Product){
+    this.router.navigateByUrl(`/product-details/${product.id}`);
+  }
+
 }
