@@ -1,0 +1,33 @@
+.form-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.action-container{
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 0;
+}
+
+.product-detail-container {
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 16px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  p {
+    margin: 8px 0;
+  }
